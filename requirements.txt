@@ -6,3 +6,4 @@ promptflow.evals
 openpyxl
 openai<=1.44.1 # https://github.com/microsoft/promptflow/issues/3751
 azure.mgmt.authorization==4.0.0
+httpx==0.27.2
