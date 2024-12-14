@@ -6,6 +6,9 @@ from promptflow.connections import AzureOpenAIConnection
 from promptflow.core import (AzureOpenAIModelConfiguration, Prompty)
 from promptflow.tracing import trace
 from azure_config import AzureConfig 
+from opentelemetry.trace import get_tracer
+
+tracer = get_tracer(__name__)
 
 # Initialize AzureConfig
 azure_config = AzureConfig()
@@ -33,7 +36,8 @@ def get_context(question, embedding):
         search_endpoint=azure_config.search_endpoint
     )
 
-@trace
+#@trace
+@tracer.start_as_current_span("get_response")
 def get_response(question, chat_history):
     print("inputs:", question)
     embedding = get_embedding(question)
